@@ -54,9 +54,7 @@ document.querySelectorAll('.carousel').forEach(carousel => {
         items.forEach((item, index) => {
             const video = item.querySelector('video');
             if (video) {
-                if (index === currentIndex) {
-                    video.play().catch(e => console.log('Autoplay prevented'));
-                } else {
+                if (index !== currentIndex) {
                     video.pause();
                 }
             }
