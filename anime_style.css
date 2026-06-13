@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base Styles */
+html {
+    scroll-behavior: smooth;
+}
+body {
+    overflow-x: hidden;
+}
+
+/* Glassmorphism Surface */
+.bg-surface {
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Animation Initial States */
+.anime-fade-up {
+    opacity: 0;
+}
+.hero-title, .hero-subtitle, .hero-cta {
+    opacity: 0;
+}
+
+/* Splash Screen */
+#splash-screen {
+    transition: opacity 0.8s ease-in-out, visibility 0.8s;
+}
+#splash-screen.hidden-splash {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* Carousel */
+.carousel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    width: 100%;
+    height: 100%;
+}
+.carousel-item {
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #020617; /* Dark background for media */
+}
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(15, 23, 42, 0.6);
+    color: #22d3ee;
+    border: 1px solid rgba(34, 211, 238, 0.3);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    z-index: 10;
+    transition: all 0.3s;
+    backdrop-filter: blur(4px);
+}
+.carousel-btn:hover {
+    background: rgba(34, 211, 238, 0.2);
+    color: #fff;
+    transform: translateY(-50%) scale(1.1);
+}
+.carousel-btn.prev { left: 10px; }
+.carousel-btn.next { right: 10px; }
+
+/* Lightbox */
+#lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(2, 6, 23, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s;
+}
+#lightbox.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+#lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+    transform: scale(0.9);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    object-fit: contain;
+}
+#lightbox.active img {
+    transform: scale(1);
+}
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #22d3ee;
+    font-size: 40px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    transition: transform 0.3s, color 0.3s;
+}
+.lightbox-close:hover {
+    transform: scale(1.2) rotate(90deg);
+    color: #fff;
+}
+.cursor-zoom-in {
+    cursor: zoom-in;
+    transition: transform 0.3s, filter 0.3s;
+}
+.anime-hover-lift {
+    transition: none; /* Handled by Anime.js */
+}
+
+/* Background Blobs Animation */
+@keyframes blob-float {
+    0% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0, 0) scale(1); }
+}
+.anime-blob {
+    animation: blob-float 10s infinite alternate ease-in-out;
+}
